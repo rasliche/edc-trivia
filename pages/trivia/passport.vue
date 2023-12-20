@@ -6,7 +6,7 @@
   const availableCodes = questionRoutes.map(route => route.meta.code )
 
   watch(code, (newCode) => {
-    const toRoute = questionRoutes.find(route => route.meta.code === newCode)
+    const toRoute = questionRoutes.find(route => route.meta.code === newCode.toUpperCase())
     if (!!toRoute) {
       questionCodeExists.value = toRoute.path
       console.log(questionCodeExists)
@@ -21,7 +21,7 @@
     <div class="w-full">
       <p>Found a code? Scan QR code or enter the text below:</p>
       <h3>Enter Code</h3>
-      <input class="block w-2/3 mx-auto border p-2 rounded" v-model="code.toLowerCase()" placeholder="M4NG" />
+      <input class="block w-2/3 mx-auto border p-2 rounded" v-model="code" placeholder="M4NG" />
       <NuxtLink :to=questionCodeExists :disabled=questionCodeExists :class="[questionCodeExists ? 'bg-green-200 hover:bg-green-300 border-green-500 border-l-2-transparent border-t-2-transparent border-b-2 border-r-2 cursor-pointer' : 'bg-yellow-200 border-2 border-transparent cursor-not-allowed']" class="block w-1/4 mx-auto rounded p-2 mt-4 cursor-pointer">{{ questionCodeExists ? "Found!" : "Nothing yet..." }}</NuxtLink>
     </div>
     <section>
